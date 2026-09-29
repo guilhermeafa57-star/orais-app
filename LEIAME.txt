@@ -1,0 +1,6 @@
+APP ORAIS (casco instalavel) - app.orais.com.br
+Estes arquivos ficam na raiz do repositorio GitHub "orais-app" (GitHub Pages, branch main, pasta raiz).
+O app so abre o WebApp da Orais dentro de uma tela cheia. Nada do sistema fica aqui.
+DNS na GoDaddy: registro CNAME, nome "app", valor "guilhermeafa57-star.github.io".
+Instalar: Android (Chrome > menu > Adicionar a tela inicial) | iPhone (Safari > Compartilhar > Adicionar a Tela de Inicio).
+Se trocar a URL /exec do WebApp, edite o src do iframe no index.html.
