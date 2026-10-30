@@ -1,5 +1,5 @@
 // Cache so do casco. Tudo do script.google.com passa direto pela rede.
-var CACHE = 'orais-casco-v7';
+var CACHE = 'orais-casco-v8';
 var ARQS = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(ARQS); }));
@@ -14,7 +14,8 @@ self.addEventListener('activate', function (e) {
 self.addEventListener('fetch', function (e) {
   var u = new URL(e.request.url);
   if (e.request.method !== 'GET' || u.origin !== self.location.origin) return;
-  e.respondWith(fetch(e.request).then(function (r) {
+  var req = (e.request.mode === 'navigate' || /\.html$|\/$/.test(u.pathname)) ? new Request(e.request, { cache: 'no-cache' }) : e.request;   // pagina sempre revalidada no servidor
+  e.respondWith(fetch(req).then(function (r) {
     var cp = r.clone(); caches.open(CACHE).then(function (c) { c.put(e.request, cp); }); return r;
   }).catch(function () { return caches.match(e.request); }));
 });
